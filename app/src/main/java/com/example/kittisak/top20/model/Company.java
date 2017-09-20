@@ -50,7 +50,7 @@ public class Company {
     }
 
     public String getMarketCap() {
-        return mMarketCap.replace(",", "");
+        return mMarketCap;
     }
 
     public void setMarketCap(String marketCap) {

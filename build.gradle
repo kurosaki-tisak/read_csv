@@ -27,6 +27,7 @@ ext {
     constraintLayoutVersion = '1.0.2'
     univocityVersion = '2.5.5'
     retrofit2Version = '2.3.0'
+    segmentedVersion = '1.0.6'
 
     espressoVersion = '2.2.2'
 }

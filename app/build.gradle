@@ -59,6 +59,8 @@ dependencies {
 
     compile "com.univocity:univocity-parsers:$rootProject.ext.univocityVersion"
 
+    compile "info.hoang8f:android-segmented:$rootProject.ext.segmentedVersion"
+
     androidTestCompile("com.android.support.test.espresso:espresso-core:$rootProject.ext.espressoVersion", {
         exclude group: 'com.android.support', module: 'support-annotations'
     })

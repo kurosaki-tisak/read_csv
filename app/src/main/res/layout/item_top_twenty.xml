@@ -6,22 +6,61 @@
     android:orientation="vertical"
     android:padding="10dp">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/text_view_company_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Company name"/>
+        android:orientation="horizontal">
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/text_view_sector"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Sector"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="Company:"
+            android:textStyle="bold"/>
 
-    <android.support.v7.widget.AppCompatTextView
-        android:id="@+id/text_view_market_capital"
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/text_view_company_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Company name"/>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Market Cap"/>
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="Sector:"
+            android:textStyle="bold"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/text_view_sector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Sector"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingRight="10dp"
+            android:text="Market Cap:"
+            android:textStyle="bold"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/text_view_market_capital"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Market Cap"/>
+    </LinearLayout>
 
 </LinearLayout>

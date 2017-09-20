@@ -13,13 +13,12 @@ import java.util.List;
 public interface Top20Contract {
 
     interface Top20View extends BaseView<Top20Presenter>{
-        void showProgressDialog();
         void showList(List<Company> companyList);
         void showErrorDialog();
-        void hideProgressDialog();
     }
 
     interface Top20Presenter extends BasePresenter {
         void getCSVFile(String filePath);
+        void getList(boolean isFilter);
     }
 }

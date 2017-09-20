@@ -1,6 +1,5 @@
 package com.example.kittisak.top20.features.top20;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.example.kittisak.top20.model.Company;
@@ -11,11 +10,10 @@ import com.univocity.parsers.csv.CsvParserSettings;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.PriorityQueue;
 
 /**
  * Created by kittisak on 9/19/2017 AD.
@@ -23,16 +21,16 @@ import java.util.TreeMap;
 
 public class Top20Presenter implements Top20Contract.Top20Presenter {
 
-    @NonNull
-    private Context mContext;
 
     @NonNull
     private final Top20Contract.Top20View mView;
 
-    public Top20Presenter(@NonNull Context context,
-                          @NonNull Top20Contract.Top20View view) {
-        mContext = context;
+    private List<Company> mCompanyList;
+
+    public Top20Presenter(@NonNull Top20Contract.Top20View view) {
         mView = view;
+
+        mCompanyList = new ArrayList<>();
     }
 
     @Override
@@ -63,14 +61,10 @@ public class Top20Presenter implements Top20Contract.Top20Presenter {
             CsvParser parser = new CsvParser(parserSettings);
             parser.parse(fileReader);
 
-            List<Company> beans = rowProcessor.getBeans();
-            beans.remove(0);
+            mCompanyList = rowProcessor.getBeans();
+            mCompanyList.remove(0);
 
-       //     List<Company> top20 = findTopK(beans, 20);
-
-       //     mView.showList(top20);
-
-            mView.showList(beans);
+            mView.showList(mCompanyList);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -80,7 +74,67 @@ public class Top20Presenter implements Top20Contract.Top20Presenter {
 
     }
 
-    public List<Company> findTopK(List<Company> companyList, int size) {
-        return null;
+    @Override
+    public void getList(boolean isFilter) {
+
+        List<Company> result;
+
+        if (isFilter) {
+
+            result = findTopK(mCompanyList, 20);
+            mView.showList(result);
+
+        } else {
+
+            mView.showList(mCompanyList);
+
+        }
     }
+
+    public List<Company> findTopK(List<Company> companyList, int size) {
+
+        PriorityQueue<Company> priorityQueue = new PriorityQueue<>(size, mComparator);
+        for (Company company : companyList) {
+            Company peak = priorityQueue.peek();
+            Company newCompany = company;
+
+            if (priorityQueue.size() < size)
+                priorityQueue.add(newCompany);
+            else if (mComparator.compare(newCompany, peak) > 0) {
+                priorityQueue.poll();
+                priorityQueue.add(newCompany);
+            }
+        }
+
+        List<Company> result = new ArrayList<>(size);
+        while (!priorityQueue.isEmpty()) {
+            result.add(priorityQueue.poll());
+        }
+
+        Collections.sort(result, new Comparator<Company>() {
+            @Override
+            public int compare(Company a, Company b) {
+                double compA = Double.parseDouble(a.getWeight());
+                double compB = Double.parseDouble(b.getWeight());
+
+                return compA > compB ? -1 : (compA < compB) ? 1 : 0;
+            }
+        });
+
+        return result;
+    }
+
+    private Comparator<Company> mComparator = new Comparator<Company>() {
+        @Override
+        public int compare(Company a, Company b) {
+            double compA = Double.parseDouble(a.getWeight());
+            double compB = Double.parseDouble(b.getWeight());
+            if (compA > compB)
+                return 1;
+            else
+                return 0;
+        }
+    };
+
+
 }
