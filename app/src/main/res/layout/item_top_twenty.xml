@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_view_company_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Company name"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_view_sector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sector"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/text_view_market_capital"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Market Cap"/>
+
+</LinearLayout>
